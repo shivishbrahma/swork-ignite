@@ -4,6 +4,9 @@
     "description": "CodeIgniter4 starter app",
     "homepage": "https://codeigniter.com",
     "license": "MIT",
+    "provide": {
+        "codeigniter4/authentication-implementation": "1.0"
+    },
     "require": {
         "php": "^7.4 || ^8.0",
         "codeigniter4/framework": "^4.0"
