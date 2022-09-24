@@ -33,7 +33,7 @@ class Migrations extends BaseConfig
      *
      * @var string
      */
-    public $table = 'migrations';
+    public $table = 'swk_migrations';
 
     /**
      * --------------------------------------------------------------------------
