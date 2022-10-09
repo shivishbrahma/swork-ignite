@@ -10,7 +10,7 @@
 
 <body id="root">
 
-    <script src="<?= base_url('/assets/bundle.js') ?>"></script>
+    <script src="<?= base_url('/assets/main.bundle.js') ?>"></script>
 </body>
 
 </html>

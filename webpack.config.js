@@ -1,12 +1,23 @@
 const path = require("path");
 const { VueLoaderPlugin } = require("vue-loader");
+const dotenv = require("dotenv");
+const { DefinePlugin } = require('webpack');
+const app_env = dotenv.config({ path: ".env" }).parsed;
 
 module.exports = {
 	entry: "./src/index.js",
-	mode: "development",
+	mode: app_env.CI_ENVIRONMENT,
 	output: {
 		path: path.resolve(__dirname, "public/assets"),
-		filename: "bundle.js",
+		filename: "[name].bundle.js",
+	},
+	resolve: {
+		extensions: ["*", ".js", ".vue", ".json"],
+		fallback: {
+			fs: false,
+			os: false,
+			path: false,
+		},
 	},
 	module: {
 		rules: [
@@ -33,16 +44,44 @@ module.exports = {
 			// AND `<style>` blocks in `.vue` files
 			{
 				test: /\.css$/i,
-				use: ["vue-style-loader", "css-loader"],
+				use: [
+					"vue-style-loader",
+					{
+						loader: "css-loader",
+						options: {
+							sourceMap: true,
+						},
+					},
+				],
 			},
 			{
 				test: /\.s[ac]ss$/i,
-				use: ["vue-style-loader", "css-loader", "sass-loader"],
+				use: [
+					"vue-style-loader",
+					{
+						loader: "css-loader",
+						options: {
+							sourceMap: true,
+						},
+					},
+					{
+						loader: "sass-loader",
+						options: {
+							sourceMap: true,
+							additionalData: `@import "./src/variable.scss";
+                            `,
+						},
+					},
+				],
 			},
 		],
 	},
 	plugins: [
 		// make sure to include the plugin!
 		new VueLoaderPlugin(),
+		new DefinePlugin({
+			__VUE_OPTIONS_API__: true,
+			__VUE_PROD_DEVTOOLS__: true,
+		}),
 	],
 };
