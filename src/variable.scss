@@ -1,0 +1,66 @@
+$font-family1: "Ubuntu", sans-serif;
+$font-family2: "Open Sans", sans-serif;
+
+$red: #f71735;
+$green: #52d468;
+$blue: #266dd3;
+$violet: #d17ae6;
+$yellow: #f6ae2d;
+$cyan: #63ecd7;
+
+$black: #0a090c;
+$gray-matte: #353b3c;
+$gray: #6d696a;
+$gray-light: #f0f0f0;
+$white: #fefefe;
+
+// $primary: ;
+// $secondary: ;
+// $tertiary: ;
+// $quaternary: ;
+
+$breakpoints: (
+    "xs": 0,
+    "sm": 576px,
+    "md": 768px,
+    "lg": 992px,
+    "xl": 1200px,
+);
+
+$pad: 0.75rem;
+$border: 0.25rem;
+$margin: 0.5rem;
+
+$colors: (
+    "red": $red,
+    "green": $green,
+    "blue": $blue,
+    "violet": $violet,
+    "yellow": $yellow,
+    "cyan": $cyan,
+    "black": $black,
+    "gray-matte": $gray-matte,
+    "gray": $gray,
+    "gray-light": $gray-light,
+    "white": $white,
+    // "primary": ,
+    // "secondary": ,
+    // "tertiary": ,
+    // "quaternary": ,,,,,
+);
+
+@function get-text-color($color) {
+    @if (lightness($color) > 60) {
+        @return $black; // Lighter background, return dark color
+    } @else {
+        @return $white; // Darker background, return light color
+    }
+}
+
+@function get-border-color($color) {
+    @if (lightness($color) > 60) {
+        @return darken($color, 20%); // Lighter background, return dark color
+    } @else {
+        @return lighten($color, 20%); // Darker background, return light color
+    }
+}
